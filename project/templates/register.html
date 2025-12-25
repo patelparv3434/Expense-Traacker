@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Expense Tracker</title>
+   <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+
+    <div class="register-box">
+        <h2>Register</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label>Username</label>
+            <input type="text" placeholder="Enter username" name="username">
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter email" name="email">
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" name="password">
+
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm password" name="repeatpassword">
+
+            {% if messages %}
+                {% for message in messages %}
+                <p style="color: red;">{{ message}}</p>
+                 {% endfor %}
+            {% endif %}
+            <button type="submit" name="submit">Register</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="login">Login</a>
+        </div>
+    </div>
+
+</body>
+</html>

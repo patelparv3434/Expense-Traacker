@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Expense Tracker</title>
+     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Login</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label>Username</label>
+            <input type="text" placeholder="Enter Username" name="username">
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" name="lpassword">
+
+            <button type="submit">Login</button>
+
+             {% if messages %}
+                {% for message in messages %}
+                <p style="color: red;">{{ message}}</p>
+                 {% endfor %}
+            {% endif %}
+        </form>
+
+        <div class="register-link">
+            Don't have an account? <a href="{% url 'register' %}">Register</a>
+        </div>
+    </div>
+
+</body>
+</html>

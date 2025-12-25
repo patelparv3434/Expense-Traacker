@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+    <h1>Expense Tracker</h1>
+
+    <div class="nav-buttons">
+       
+        <form method="POST" action="{% url 'track' %}">
+            {% csrf_token %}
+            <button type="submit" class="track-btn">Track</button>
+        </form>
+
+        <form method="POST" action="{% url 'Logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</div>
+
+
+      <!-- Main Content -->
+    <div class="container">
+
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- Add Funds -->
+        <div class="card">
+            <h2>Add Funds</h2>
+            <div class="form-group">
+                <label>Enter Amount</label>
+                <input type="number" placeholder="Enter funds" name="addfunds">
+            </div>
+            <button class="btn" name="addfund_submit">Add Funds</button>
+        </div>
+        </form>
+
+        <!-- Current Balance -->
+<div class="card">
+    <h2>Current Balance</h2>
+    <p class="balance">{{ current_balance }}</p>
+</div>
+
+
+
+        <!-- Add Expense -->
+<form action = "{% url 'home' %}" method="POST">
+            {% csrf_token %}
+        <div class="card">
+            <h2>Add Expense</h2>
+            <div class="form-group">
+                <label>Expense Reason</label>
+                <input type="text" placeholder="Enter reason" name="reason">
+            </div>
+            <div class="form-group">
+                <label>Expense Amount</label>
+                <input type="number" placeholder="Enter amount" name="amount">
+            </div>
+            <div class="form-group">
+                <label>Date and Time(Optional)</label>
+                <input type="datetime-local" name="date">
+            </div>
+            
+            <button class="btn" name="expense_submit">Add Expense</button>
+        </div>
+
+        <!-- Expense List -->
+        <div class="card">
+            <h2>Expense History</h2>
+            <table>
+                <tr>
+                    <th>Reason</th>
+                    <th>Amount</th>
+                    <th>Date&Time</th>
+                </tr>
+               {% for expenses in show_expense %}
+               <tr>
+                <td>{{ expenses.Reason }}</td>
+                <td>{{ expenses.Amount }}</td>
+                <td>{{ expenses.Date | date:"d M Y, h:i A"}}</td>
+               </tr>
+               {% endfor %}
+            </table>
+        </div>
+        </form>
+
+    </div>
+    
+
+</body>
+</html>
