@@ -1,0 +1,3 @@
+This is a Practice project for my Django , git and github..
+
+Thanks for Visiting.....
